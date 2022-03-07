@@ -1,5 +1,33 @@
 .App {
   text-align: center;
 }
+.header {
+  display: grid;
+  background-color: lightsalmon;
+  grid-template-columns: 1fr 1fr;
+}
+#header__H3 {
+  text-align: left;
+  color: black;
+}
 
+.header__user {
+  text-align: right;
+  font-weight: bold;
+}
 
+.navigator {
+  color: black;
+}
+.articleList {
+  padding-left: 5px;
+  padding-right: 5px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2px;
+  list-style: none;
+}
+.articleCard {
+  background-color: rgba(210, 153, 78, 0.516);
+  border: 2px black solid;
+}
