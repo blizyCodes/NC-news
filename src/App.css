@@ -2,11 +2,18 @@
   text-align: center;
 }
 .header {
+  display: grid;
   background-color: lightsalmon;
+  grid-template-columns: 1fr 1fr;
 }
-#headerH3 {
+#header__H3 {
   text-align: left;
   color: black;
+}
+
+.header__user {
+  text-align: right;
+  font-weight: bold;
 }
 
 .navigator {
