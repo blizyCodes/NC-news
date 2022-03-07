@@ -6,4 +6,21 @@
 }
 #headerH3 {
   text-align: left;
+  color: black;
+}
+
+.navigator {
+  color: black;
+}
+.articleList {
+  padding-left: 5px;
+  padding-right: 5px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2px;
+  list-style: none;
+}
+.articleCard {
+  background-color: rgba(210, 153, 78, 0.516);
+  border: 2px black solid;
 }
