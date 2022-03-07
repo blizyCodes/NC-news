@@ -17,7 +17,13 @@
 }
 
 .navigator {
+  text-align: right;
+  padding-right: 10px;
+}
+.navigator__link {
   color: black;
+  padding-right: 10px;
+  text-align: left;
 }
 .articleList {
   padding-left: 5px;

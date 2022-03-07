@@ -10,3 +10,17 @@ export const getArticles = async () => {
   } = await newsApi.get("/articles");
   return articles;
 };
+
+export const getTopics = async () => {
+  const {
+    data: { topics },
+  } = await newsApi.get("/topics");
+  return topics;
+};
+
+export const getArticlesByTopic = async (topic) => {
+  const {
+    data: { articles },
+  } = newsApi.get(`/articles?topic=${topic}`);
+  return articles;
+};
