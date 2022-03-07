@@ -7,7 +7,7 @@ export const ArticleList = () => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { topic } = useParams();
-
+  
   useEffect(() => {
     if (!topic) {
       api.getArticles().then((articles) => {

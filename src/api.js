@@ -21,6 +21,6 @@ export const getTopics = async () => {
 export const getArticlesByTopic = async (topic) => {
   const {
     data: { articles },
-  } = newsApi.get(`/articles?topic=${topic}`);
+  } = await newsApi.get(`/articles?topic=${topic}`);
   return articles;
 };
