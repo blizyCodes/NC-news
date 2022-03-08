@@ -22,7 +22,7 @@ export const ArticleCard = ({
       </h2>
       <p>by {author}</p>
       <CollapseWrapper>
-        <p>Topic: {topic}</p>
+        <p>Topic: {topic.charAt(0).toUpperCase() + topic.slice(1)}</p>
         <p>Comments: {comment_count}</p>
         <p>Posted: {date.toLocaleString()}</p>
         <p>Votes: {votes}</p>

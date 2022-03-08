@@ -20,7 +20,7 @@ export const ArticleList = () => {
         setArticles(articles);
       });
     }
-  }, [topic]); //add article_id
+  }, [topic]); 
 
   return isLoading ? (
     <h2>Just getting that for you ...</h2>
