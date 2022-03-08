@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const CollapseWrapper = ({ children }) => {
+export const CommentsWrapper = ({ children }) => {
   const [isVisible, setIsVisible] = useState(false);
   const handleClick = () => {
     setIsVisible((currentVisibility) => {
@@ -11,7 +11,7 @@ export const CollapseWrapper = ({ children }) => {
     <>
       {isVisible && children}
       <button className="articleCard__button" onClick={handleClick}>
-        {isVisible ? "Show Less" : "Show More"}
+        {isVisible ? "Hide Comments" : "Show Comments"}
       </button>
     </>
   );

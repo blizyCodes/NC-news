@@ -24,3 +24,17 @@ export const getArticlesByTopic = async (topic) => {
   } = await newsApi.get(`/articles?topic=${topic}`);
   return articles;
 };
+
+export const getArticleById = async (articleId) => {
+  const {
+    data: { article },
+  } = await newsApi.get(`/articles/${articleId}`);
+  return article;
+};
+
+export const getCommentsByArticleId = async (articleId) => {
+  const {
+    data: { comments },
+  } = await newsApi.get(`/articles/${articleId}/comments`);
+  return comments;
+};

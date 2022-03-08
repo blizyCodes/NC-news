@@ -8,6 +8,7 @@ import { Header } from "./components/Header";
 import { ArticleList } from "./components/ArticleList";
 import { Navigator } from "./components/Navigator.jsx";
 import { Home } from "./components/Home";
+import { SingleArticle } from "./components/SingleArticle";
 
 function App() {
   const [loggedInUser] = useState("jessjelly");
@@ -22,6 +23,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/articles" element={<ArticleList />} />
             <Route path="/topics/:topic" element={<ArticleList />} />
+            <Route path="/articles/:article_id" element={<SingleArticle />} />
           </Routes>
         </div>
       </BrowserRouter>
