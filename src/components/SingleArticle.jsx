@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import * as api from "../api";
 import { CommentsWrapper } from "./CommentsWrapper";
 import { CommentList } from "./CommentsList";
+import { ArticleVoting } from "./ArticleVoting";
 
 export const SingleArticle = () => {
   const [article, setArticle] = useState({});
@@ -17,32 +18,6 @@ export const SingleArticle = () => {
   }, [article_id]);
   const date = new Date(article.created_at);
 
-  const handleVoting = (incVotes) => {
-    setArticle((currArticle) => {
-      const updatedArticle = {
-        ...currArticle,
-      };
-      updatedArticle.votes += incVotes;
-      return updatedArticle;
-    });
-
-    api
-      .patchVotesOnArticleByArticleId(article_id, incVotes)
-      .then((article) => {
-        setArticle(article);
-        setErr(null);
-      })
-      .catch((err) => {
-        setArticle((currArticle) => {
-          const updatedArticle = {
-            ...currArticle,
-          };
-          updatedArticle.votes -= incVotes;
-          return updatedArticle;
-        });
-        setErr("Something went wrong, please try again");
-      });
-  };
   const refreshPage = () => {
     window.location.reload();
   };
@@ -60,30 +35,19 @@ export const SingleArticle = () => {
   ) : (
     <article className="singleArticle">
       <h1>{article.title}</h1>
-      <dt>by <b>{article.author}</b></dt>
-      <dt> on <u>{date.toLocaleString()}</u></dt>
       <dt>
-        Topic: <i>{article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}</i>
+        by <b>{article.author}</b>
+      </dt>
+      <dt>
+        {" "}
+        on <u>{date.toLocaleString()}</u>
+      </dt>
+      <dt>
+        Topic:{" "}
+        <i>{article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}</i>
       </dt>
       <dt> -- Votes: {article.votes}</dt>
-      <dt>
-        <button
-          onClick={() => {
-            handleVoting(1);
-          }}
-        >
-          Upvote
-        </button>
-      </dt>
-      <dt>
-        <button
-          onClick={() => {
-            handleVoting(-1);
-          }}
-        >
-          Downvote
-        </button>
-      </dt>
+      <ArticleVoting article_id={article_id} setArticle={setArticle} setErr={setErr} />
       <p className="singleArticle__body"> {article.body}</p>
       <p>Comment: {article.comment_count}</p>
       <CommentsWrapper>
