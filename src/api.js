@@ -38,3 +38,10 @@ export const getCommentsByArticleId = async (articleId) => {
   } = await newsApi.get(`/articles/${articleId}/comments`);
   return comments;
 };
+
+export const patchVotesOnArticleByArticleId = async (articleId, inc_votes) => {
+  const {
+    data: { article },
+  } = await newsApi.patch(`/articles/${articleId}`, { inc_votes });
+  return article;
+};

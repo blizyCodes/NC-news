@@ -7,6 +7,7 @@ import { CommentList } from "./CommentsList";
 export const SingleArticle = () => {
   const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [err, setErr] = useState(null);
   const { article_id } = useParams();
   useEffect(() => {
     api.getArticleById(article_id).then((article) => {
@@ -15,6 +16,44 @@ export const SingleArticle = () => {
     });
   }, [article_id]);
   const date = new Date(article.created_at);
+
+  const handleVoting = (incVotes) => {
+    setArticle((currArticle) => {
+      const updatedArticle = {
+        ...currArticle,
+      };
+      updatedArticle.votes += incVotes;
+      return updatedArticle;
+    });
+
+    api
+      .patchVotesOnArticleByArticleId(article_id, incVotes)
+      .then((article) => {
+        setArticle(article);
+        setErr(null);
+      })
+      .catch((err) => {
+        setArticle((currArticle) => {
+          const updatedArticle = {
+            ...currArticle,
+          };
+          updatedArticle.votes -= incVotes;
+          return updatedArticle;
+        });
+        setErr("Something went wrong, please try again");
+      });
+  };
+  const refreshPage = () => {
+    window.location.reload();
+  };
+
+  if (err)
+    return (
+      <div>
+        <p>{err}</p>
+        <button onClick={refreshPage}> Back to Article</button>
+      </div>
+    );
 
   return isLoading ? (
     <h2>Just getting that for you ...</h2>
@@ -27,6 +66,24 @@ export const SingleArticle = () => {
         Topic: {article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}
       </dt>
       <dt> -- Votes: {article.votes}</dt>
+      <dt>
+        <button
+          onClick={() => {
+            handleVoting(1);
+          }}
+        >
+          Upvote
+        </button>
+      </dt>
+      <dt>
+        <button
+          onClick={() => {
+            handleVoting(-1);
+          }}
+        >
+          Downvote
+        </button>
+      </dt>
       <p className="singleArticle__body"> {article.body}</p>
       <p>Comment: {article.comment_count}</p>
       <CommentsWrapper>
@@ -35,5 +92,3 @@ export const SingleArticle = () => {
     </article>
   );
 };
-
-
