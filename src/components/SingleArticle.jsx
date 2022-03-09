@@ -60,10 +60,10 @@ export const SingleArticle = () => {
   ) : (
     <article className="singleArticle">
       <h1>{article.title}</h1>
-      <dt>by {article.author}</dt>
-      <dt> on {date.toLocaleString()}</dt>
+      <dt>by <b>{article.author}</b></dt>
+      <dt> on <u>{date.toLocaleString()}</u></dt>
       <dt>
-        Topic: {article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}
+        Topic: <i>{article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}</i>
       </dt>
       <dt> -- Votes: {article.votes}</dt>
       <dt>
