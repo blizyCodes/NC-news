@@ -5,10 +5,13 @@ export const CommentCard = ({
   return (
     <li className="commentCard">
       <p>
-        {author} <br /> {date.toLocaleString()}
+        <b> {author} </b>
+        <br /> {date.toLocaleString()}
       </p>
       <p className="commentCard__body">{body}</p>
-      <p>Votes: {votes}</p>
+      <p>
+        Votes: <b>{votes}</b>
+      </p>
     </li>
   );
 };
