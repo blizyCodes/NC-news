@@ -121,3 +121,9 @@
 .articlesPage {
   margin-top: 5px;
 }
+
+#characterLimit {
+  color: rgba(255, 0, 0, 0.544);
+  padding-left: 5px;
+  padding-right: 5px;
+}

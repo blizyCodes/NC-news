@@ -54,7 +54,12 @@ export const CommentPoster = ({ articleId, setPosted, setArticle, setErr }) => {
       ></input>
       <button
         className="submitComment"
-        disabled={newComment === "" || postedStatus === "pending" }
+        disabled={
+          newComment === "" ||
+          postedStatus === "pending" ||
+          newComment.length > 750 ||
+          newComment.length < 10
+        }
         type="submit"
       >
         {" "}
@@ -67,6 +72,11 @@ export const CommentPoster = ({ articleId, setPosted, setArticle, setErr }) => {
       <p className="submitComment" id="postVerificationPending">
         {" "}
         {postedStatus === "pending" ? `Comment being posted..` : " "}
+      </p>
+      <p>
+        {" "}
+        Characters: {newComment.length}/750.{" "}
+        <i id="characterLimit">Please submit between 10 and 750 characters.</i>
       </p>
     </form>
   );
