@@ -46,12 +46,17 @@ export const SingleArticle = () => {
         Topic:{" "}
         <i>{article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}</i>
       </dt>
-      <dt> -- Votes: {article.votes}</dt>
-      <ArticleVoting article_id={article_id} setArticle={setArticle} setErr={setErr} />
+      <dt> -- Votes: {article.votes} </dt>
+      <ArticleVoting
+        article_id={article_id}
+        setArticle={setArticle}
+        setErr={setErr}
+      />
       <p className="singleArticle__body"> {article.body}</p>
-      <p>Comment: {article.comment_count}</p>
+      <p>Comment: {article.comment_count} </p>
+
       <CommentsWrapper>
-        <CommentList />
+        <CommentList setArticle={setArticle} setErr={setErr} err={err} />
       </CommentsWrapper>
     </article>
   );

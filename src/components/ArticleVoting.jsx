@@ -16,8 +16,7 @@ export const ArticleVoting = ({ article_id, setArticle, setErr }) => {
     });
     api
       .patchVotesOnArticleByArticleId(article_id, incVotes)
-      .then((article) => {
-        setArticle(article);
+      .then(() => {
         setErr(null);
       })
       .catch((err) => {

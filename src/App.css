@@ -100,3 +100,15 @@
 #goToTop {
   text-decoration: none;
 }
+
+.submitComment {
+  display: inline;
+}
+
+#postVerification {
+  color: green;
+}
+
+#postVerificationPending {
+  color: red;
+}
