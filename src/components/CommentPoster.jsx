@@ -3,17 +3,10 @@ import { useContext } from "react";
 import { UserContext } from "../contexts/User";
 import * as api from "../api";
 
-
-export const CommentPoster = ({
-  articleId,
-  setPosted,
-  setArticle,
-  setErr,
-}) => {
+export const CommentPoster = ({ articleId, setPosted, setArticle, setErr }) => {
   const { loggedInUser } = useContext(UserContext);
   const [newComment, setNewComment] = useState("");
   const [postedStatus, setPostedStatus] = useState("");
- 
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,8 +39,6 @@ export const CommentPoster = ({
       });
   };
 
-
-
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="commentToPost">Post Comment </label>
@@ -63,7 +54,7 @@ export const CommentPoster = ({
       ></input>
       <button
         className="submitComment"
-        disabled={newComment === ""}
+        disabled={newComment === "" || postedStatus === "pending" }
         type="submit"
       >
         {" "}

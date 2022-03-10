@@ -53,7 +53,7 @@ export const SingleArticle = () => {
       </dt>
       <dt>
         Topic:{" "}
-        <i>{article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}</i>
+       {article.topic && <i>{article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}</i>} 
       </dt>
       <dt> -- Votes: {article.votes} </dt>
       <ArticleVoting
