@@ -112,3 +112,12 @@
 #postVerificationPending {
   color: red;
 }
+
+.dropdown-sortBy-order {
+  display: inline;
+  padding: 5px;
+}
+
+.articlesPage {
+  margin-top: 5px;
+}

@@ -4,10 +4,12 @@ const newsApi = axios.create({
   baseURL: "https://nb-news.herokuapp.com/api",
 });
 
-export const getArticles = async () => {
+export const getArticles = async (sortBy, order, topic) => {
   const {
     data: { articles },
-  } = await newsApi.get("/articles");
+  } = await newsApi.get(`/articles`, {
+    params: { sort_by: sortBy, order: order, topic: topic },
+  });
   return articles;
 };
 
@@ -16,13 +18,6 @@ export const getTopics = async () => {
     data: { topics },
   } = await newsApi.get("/topics");
   return topics;
-};
-
-export const getArticlesByTopic = async (topic) => {
-  const {
-    data: { articles },
-  } = await newsApi.get(`/articles?topic=${topic}`);
-  return articles;
 };
 
 export const getArticleById = async (articleId) => {
@@ -46,9 +41,9 @@ export const patchVotesOnArticleByArticleId = async (articleId, inc_votes) => {
   return article;
 };
 
-export const postCommentByArticleId = async (article_id, username, body) => {
+export const postCommentByArticleId = async (articleId, username, body) => {
   const {
     data: { comment },
-  } = await newsApi.post(`articles/${article_id}/comments`, { username, body });
+  } = await newsApi.post(`articles/${articleId}/comments`, { username, body });
   return comment;
 };
