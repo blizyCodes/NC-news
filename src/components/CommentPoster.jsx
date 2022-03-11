@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../contexts/User";
 import * as api from "../api";
 
@@ -11,6 +10,7 @@ export const CommentPoster = ({ articleId, setPosted, setArticle, setErr }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setPostedStatus("pending");
+    setPosted(false);
     const toBePosted = { username: loggedInUser, body: newComment };
     api
       .postCommentByArticleId(articleId, toBePosted.username, toBePosted.body)
@@ -35,7 +35,9 @@ export const CommentPoster = ({ articleId, setPosted, setArticle, setErr }) => {
           updatedArticle.comment_count--;
           return updatedArticle;
         });
-        setErr("Something went wrong, please try again");
+        setErr(
+          "Something went wrong, please try again. Please also ensure you are logged on."
+        );
       });
   };
 

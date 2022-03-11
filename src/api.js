@@ -44,6 +44,11 @@ export const patchVotesOnArticleByArticleId = async (articleId, inc_votes) => {
 export const postCommentByArticleId = async (articleId, username, body) => {
   const {
     data: { comment },
-  } = await newsApi.post(`articles/${articleId}/comments`, { username, body });
+  } = await newsApi.post(`/articles/${articleId}/comments`, { username, body });
   return comment;
+};
+
+export const deleteCommentByCommentId = async (commentId) => {
+  const res = await newsApi.delete(`/comments/${commentId}`);
+  return res;
 };

@@ -13,6 +13,7 @@ export const SingleArticle = () => {
   const [err, setErr] = useState(null);
   const { article_id } = useParams();
   const [posted, setPosted] = useState(false);
+  const [deleted, setDeleted] = useState(false);
   useEffect(() => {
     api.getArticleById(article_id).then((article) => {
       setArticle(article);
@@ -24,7 +25,7 @@ export const SingleArticle = () => {
       setIsLoading(false);
       setComments(comments);
     });
-  }, [article_id, posted]);
+  }, [article_id, posted, deleted]);
   const date = new Date(article.created_at);
 
   const refreshPage = () => {
@@ -53,7 +54,11 @@ export const SingleArticle = () => {
       </dt>
       <dt>
         Topic:{" "}
-       {article.topic && <i>{article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}</i>} 
+        {article.topic && (
+          <i>
+            {article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}
+          </i>
+        )}
       </dt>
       <dt> -- Votes: {article.votes} </dt>
       <ArticleVoting
@@ -62,7 +67,7 @@ export const SingleArticle = () => {
         setErr={setErr}
       />
       <p className="singleArticle__body"> {article.body}</p>
-      <p>Comment: {article.comment_count} </p>
+      <p>Comments: {article.comment_count} </p>
       <CommentPoster
         articleId={article_id}
         setPosted={setPosted}
@@ -72,7 +77,13 @@ export const SingleArticle = () => {
         err={err}
       />
       <CommentsWrapper>
-        <CommentList isLoading={isLoading} comments={comments} />
+        <CommentList
+          isLoading={isLoading}
+          comments={comments}
+          setDeleted={setDeleted}
+          setArticle={setArticle}
+          setErr={setErr}
+        />
       </CommentsWrapper>
     </article>
   );

@@ -24,6 +24,7 @@ function App() {
             <Route path="/articles" element={<ArticleList />} />
             <Route path="/topics/:topic" element={<ArticleList />} />
             <Route path="/articles/:article_id" element={<SingleArticle />} />
+            <Route path="*" element={ErrorPage} />
           </Routes>
         </div>
       </BrowserRouter>

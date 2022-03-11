@@ -127,3 +127,9 @@
   padding-left: 5px;
   padding-right: 5px;
 }
+
+.deleteBtn {
+  margin-left: 10px;
+  width: auto;
+  height: 30px;
+}
