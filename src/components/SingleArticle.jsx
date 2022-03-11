@@ -11,9 +11,8 @@ export const SingleArticle = () => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [err, setErr] = useState(null);
+  const [errCode, setErrCode] = useState(null);
   const { article_id } = useParams();
-  const [posted, setPosted] = useState(false);
-  const [deleted, setDeleted] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     api
@@ -23,7 +22,8 @@ export const SingleArticle = () => {
         setIsLoading(false);
       })
       .catch((err) => {
-        setErr("Article not found");
+        setErr(err.response.data.msg);
+        setErrCode(err.response.status);
         setIsLoading(false);
       });
   }, [article_id]);
@@ -33,12 +33,8 @@ export const SingleArticle = () => {
       setIsLoading(false);
       setComments(comments);
     });
-  }, [article_id, posted, deleted]);
+  }, [article_id]);
   const date = new Date(article.created_at);
-
-  const refreshPage = () => {
-    window.location.reload();
-  };
 
   if (err)
     return (
@@ -46,19 +42,18 @@ export const SingleArticle = () => {
         <p>{err}</p>
         <button
           onClick={
-            err.length < 30
+            errCode === 404
               ? () => {
                   navigate("/");
                 }
-              : refreshPage
+              : () => {setErr(null)}
           }
         >
           {" "}
           Back{" "}
         </button>
       </div>
-    );
-
+    ); else {
   return isLoading ? (
     <h2>Just getting that for you ...</h2>
   ) : (
@@ -89,7 +84,7 @@ export const SingleArticle = () => {
       <p>Comments: {article.comment_count} </p>
       <CommentPoster
         articleId={article_id}
-        setPosted={setPosted}
+        setComments={setComments}
         article={article}
         setArticle={setArticle}
         setErr={setErr}
@@ -99,11 +94,11 @@ export const SingleArticle = () => {
         <CommentList
           isLoading={isLoading}
           comments={comments}
-          setDeleted={setDeleted}
+          setComments={setComments}
           setArticle={setArticle}
           setErr={setErr}
         />
       </CommentsWrapper>
     </article>
   );
-};
+}};

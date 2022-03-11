@@ -1,53 +1,49 @@
 import * as api from "../api";
-import { UserContext } from "../contexts/User";
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 export const CommentDeletion = ({
   setArticle,
   setErr,
   commentId,
-  author,
-  setDeleted,
+  setComments,
 }) => {
   const [deletedStatus, setDeletedStatus] = useState("");
-  const { loggedInUser } = useContext(UserContext);
 
   const handleClick = (e) => {
-    e.preventDefault();
-    setDeleted(false);
     setDeletedStatus("pending");
-    if (loggedInUser === author) {
-      setArticle((currArticle) => {
-        const updatedArticle = {
-          ...currArticle,
-        };
-        updatedArticle.comment_count--;
-        return updatedArticle;
-      });
-      api
-        .deleteCommentByCommentId(commentId)
-        .then(() => {
-          setDeletedStatus("");
-          setDeleted(true);
-        })
-        .catch((err) => {
-          setArticle((currArticle) => {
-            const updatedArticle = {
-              ...currArticle,
-            };
-            updatedArticle.comment_count++;
-            return updatedArticle;
+    setArticle((currArticle) => {
+      const updatedArticle = {
+        ...currArticle,
+      };
+      updatedArticle.comment_count--;
+      return updatedArticle;
+    });
+    api
+      .deleteCommentByCommentId(commentId)
+      .then(() => {
+        setDeletedStatus("");
+        setComments((currComments) => {
+          return currComments.filter((comment) => {
+            return comment.comment_id !== commentId;
           });
-          setErr(
-            "Something went wrong, please try again. Please also ensure you are logged in."
-          );
         });
-    }
+      })
+      .catch((err) => {
+        setArticle((currArticle) => {
+          const updatedArticle = {
+            ...currArticle,
+          };
+          updatedArticle.comment_count++;
+          return updatedArticle;
+        });
+        setErr(
+          "Something went wrong, please try again. Please also ensure you are logged in."
+        );
+      });
   };
   return (
     <>
       <button
-        hidden={loggedInUser !== author}
         onClick={handleClick}
         className="deleteBtn"
         disabled={deletedStatus === "pending"}

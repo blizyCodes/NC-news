@@ -2,7 +2,12 @@ import { useContext, useState } from "react";
 import { UserContext } from "../contexts/User";
 import * as api from "../api";
 
-export const CommentPoster = ({ articleId, setPosted, setArticle, setErr }) => {
+export const CommentPoster = ({
+  articleId,
+  setComments,
+  setArticle,
+  setErr,
+}) => {
   const { loggedInUser } = useContext(UserContext);
   const [newComment, setNewComment] = useState("");
   const [postedStatus, setPostedStatus] = useState("");
@@ -10,21 +15,23 @@ export const CommentPoster = ({ articleId, setPosted, setArticle, setErr }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setPostedStatus("pending");
-    setPosted(false);
     const toBePosted = { username: loggedInUser, body: newComment };
     api
       .postCommentByArticleId(articleId, toBePosted.username, toBePosted.body)
-      .then(() => {
-        setErr(null);
+      .then((comment) => {
         setPostedStatus("done");
         setNewComment("");
-        setPosted(true);
         setArticle((currArticle) => {
           const updatedArticle = {
             ...currArticle,
           };
           updatedArticle.comment_count++;
           return updatedArticle;
+        });
+        setComments((currComments) => {
+          const updatedComments = [...currComments];
+          updatedComments.push(comment);
+          return updatedComments;
         });
       })
       .catch((err) => {

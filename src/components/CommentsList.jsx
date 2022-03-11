@@ -1,6 +1,6 @@
 import { CommentCard } from "./CommentCard";
 
-export const CommentList = ({ isLoading, comments, setDeleted, setArticle, setErr }) => {
+export const CommentList = ({ isLoading, comments, setComments, setArticle, setErr }) => {
   return isLoading ? (
     <h2>Fetching comments..</h2>
   ) : (
@@ -10,7 +10,7 @@ export const CommentList = ({ isLoading, comments, setDeleted, setArticle, setEr
           <CommentCard
             key={comment.comment_id}
             comment={comment}
-            setDeleted={setDeleted}
+            setComments={setComments}
             setArticle={setArticle}
             setErr={setErr}
           />

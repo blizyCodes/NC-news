@@ -1,11 +1,14 @@
 import { CommentDeletion } from "./CommentDeletion";
+import { UserContext } from "../contexts/User";
+import { useContext } from "react";
 
 export const CommentCard = ({
   comment: { comment_id, body, votes, author, created_at },
-  setDeleted,
+  setComments,
   setArticle,
   setErr,
 }) => {
+  const { loggedInUser } = useContext(UserContext);
   const date = new Date(created_at);
   return (
     <li className="commentCard">
@@ -16,13 +19,14 @@ export const CommentCard = ({
       <p className="commentCard__body">{body}</p>
       <p>
         Votes: <b>{votes}</b>{" "}
-        <CommentDeletion
-          commentId={comment_id}
-          author={author}
-          setDeleted={setDeleted}
-          setArticle={setArticle}
-          setErr={setErr}
-        />
+        {loggedInUser === author && (
+          <CommentDeletion
+            commentId={comment_id}
+            setComments={setComments}
+            setArticle={setArticle}
+            setErr={setErr}
+          />
+        )}
       </p>
     </li>
   );
