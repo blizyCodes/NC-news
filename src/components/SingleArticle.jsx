@@ -15,11 +15,14 @@ export const SingleArticle = () => {
   const { article_id } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
-    api
-      .getArticleById(article_id)
-      .then((article) => {
-        setArticle(article);
+    Promise.all([
+      api.getArticleById(article_id),
+      api.getCommentsByArticleId(article_id),
+    ])
+      .then(([article, comments]) => {
         setIsLoading(false);
+        setArticle(article);
+        setComments(comments);
       })
       .catch((err) => {
         setErr(err.response.data.msg);
@@ -28,12 +31,6 @@ export const SingleArticle = () => {
       });
   }, [article_id]);
 
-  useEffect(() => {
-    api.getCommentsByArticleId(article_id).then((comments) => {
-      setIsLoading(false);
-      setComments(comments);
-    });
-  }, [article_id]);
   const date = new Date(article.created_at);
 
   if (err)
@@ -46,59 +43,63 @@ export const SingleArticle = () => {
               ? () => {
                   navigate("/");
                 }
-              : () => {setErr(null)}
+              : () => {
+                  setErr(null);
+                }
           }
         >
           {" "}
           Back{" "}
         </button>
       </div>
-    ); else {
-  return isLoading ? (
-    <h2>Just getting that for you ...</h2>
-  ) : (
-    <article className="singleArticle">
-      <h1>{article.title}</h1>
-      <dt>
-        by <b>{article.author}</b>
-      </dt>
-      <dt>
-        {" "}
-        on <u>{date.toLocaleString()}</u>
-      </dt>
-      <dt>
-        Topic:{" "}
-        {article.topic && (
-          <i>
-            {article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}
-          </i>
-        )}
-      </dt>
-      <dt> -- Votes: {article.votes} </dt>
-      <ArticleVoting
-        article_id={article_id}
-        setArticle={setArticle}
-        setErr={setErr}
-      />
-      <p className="singleArticle__body"> {article.body}</p>
-      <p>Comments: {article.comment_count} </p>
-      <CommentPoster
-        articleId={article_id}
-        setComments={setComments}
-        article={article}
-        setArticle={setArticle}
-        setErr={setErr}
-        err={err}
-      />
-      <CommentsWrapper>
-        <CommentList
-          isLoading={isLoading}
-          comments={comments}
-          setComments={setComments}
+    );
+  else {
+    return isLoading ? (
+      <h2>Just getting that for you ...</h2>
+    ) : (
+      <article className="singleArticle">
+        <h1>{article.title}</h1>
+        <dt>
+          by <b>{article.author}</b>
+        </dt>
+        <dt>
+          {" "}
+          on <u>{date.toLocaleString()}</u>
+        </dt>
+        <dt>
+          Topic:{" "}
+          {article.topic && (
+            <i>
+              {article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}
+            </i>
+          )}
+        </dt>
+        <dt> -- Votes: {article.votes} </dt>
+        <ArticleVoting
+          article_id={article_id}
           setArticle={setArticle}
           setErr={setErr}
         />
-      </CommentsWrapper>
-    </article>
-  );
-}};
+        <p className="singleArticle__body"> {article.body}</p>
+        <p>Comments: {article.comment_count} </p>
+        <CommentPoster
+          articleId={article_id}
+          setComments={setComments}
+          article={article}
+          setArticle={setArticle}
+          setErr={setErr}
+          err={err}
+        />
+        <CommentsWrapper>
+          <CommentList
+            isLoading={isLoading}
+            comments={comments}
+            setComments={setComments}
+            setArticle={setArticle}
+            setErr={setErr}
+          />
+        </CommentsWrapper>
+      </article>
+    );
+  }
+};
