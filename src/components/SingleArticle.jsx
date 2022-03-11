@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import * as api from "../api";
 import { CommentsWrapper } from "./CommentsWrapper";
 import { CommentList } from "./CommentsList";
@@ -14,12 +14,20 @@ export const SingleArticle = () => {
   const { article_id } = useParams();
   const [posted, setPosted] = useState(false);
   const [deleted, setDeleted] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
-    api.getArticleById(article_id).then((article) => {
-      setArticle(article);
-      setIsLoading(false);
-    });
+    api
+      .getArticleById(article_id)
+      .then((article) => {
+        setArticle(article);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setErr("Article not found");
+        setIsLoading(false);
+      });
   }, [article_id]);
+
   useEffect(() => {
     api.getCommentsByArticleId(article_id).then((comments) => {
       setIsLoading(false);
@@ -36,7 +44,18 @@ export const SingleArticle = () => {
     return (
       <div>
         <p>{err}</p>
-        <button onClick={refreshPage}> Back to Article</button>
+        <button
+          onClick={
+            err.length < 30
+              ? () => {
+                  navigate("/");
+                }
+              : refreshPage
+          }
+        >
+          {" "}
+          Back{" "}
+        </button>
       </div>
     );
 
