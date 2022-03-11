@@ -8,7 +8,7 @@
   background-color: lightsalmon;
   grid-template-columns: 1fr 1fr;
 }
-#header__H3 {
+.header__H3 {
   text-align: left;
   color: black;
   font-size: x-large;
@@ -16,13 +16,22 @@
   text-decoration: none;
   padding-left: 10px;
 }
-
+.header__H3:hover {
+  color: indianred;
+}
 .header__user {
   text-align: right;
-  font-weight: bold;
+  font-weight: bolder;
   padding-right: 10px;
+  text-decoration: none;
+  color: black;
 }
-
+.header__user:visited {
+  color: none;
+}
+.header__user:hover {
+  color: blue;
+}
 .navigator {
   text-align: right;
   padding-right: 10px;
@@ -132,4 +141,12 @@
   margin-left: 10px;
   width: auto;
   height: 30px;
+}
+
+.user {
+  cursor: pointer;
+  padding: 5px;
+}
+.user:hover {
+  color: crimson;
 }
