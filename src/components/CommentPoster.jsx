@@ -1,9 +1,13 @@
-import { useState } from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../contexts/User";
 import * as api from "../api";
 
-export const CommentPoster = ({ articleId, setPosted, setArticle, setErr }) => {
+export const CommentPoster = ({
+  articleId,
+  setComments,
+  setArticle,
+  setErr,
+}) => {
   const { loggedInUser } = useContext(UserContext);
   const [newComment, setNewComment] = useState("");
   const [postedStatus, setPostedStatus] = useState("");
@@ -14,17 +18,20 @@ export const CommentPoster = ({ articleId, setPosted, setArticle, setErr }) => {
     const toBePosted = { username: loggedInUser, body: newComment };
     api
       .postCommentByArticleId(articleId, toBePosted.username, toBePosted.body)
-      .then(() => {
-        setErr(null);
+      .then((comment) => {
         setPostedStatus("done");
         setNewComment("");
-        setPosted(true);
         setArticle((currArticle) => {
           const updatedArticle = {
             ...currArticle,
           };
           updatedArticle.comment_count++;
           return updatedArticle;
+        });
+        setComments((currComments) => {
+          const updatedComments = [...currComments];
+          updatedComments.push(comment);
+          return updatedComments;
         });
       })
       .catch((err) => {
@@ -35,7 +42,9 @@ export const CommentPoster = ({ articleId, setPosted, setArticle, setErr }) => {
           updatedArticle.comment_count--;
           return updatedArticle;
         });
-        setErr("Something went wrong, please try again");
+        setErr(
+          "Something went wrong, please try again. Please also ensure you are logged in."
+        );
       });
   };
 
@@ -54,7 +63,12 @@ export const CommentPoster = ({ articleId, setPosted, setArticle, setErr }) => {
       ></input>
       <button
         className="submitComment"
-        disabled={newComment === "" || postedStatus === "pending" }
+        disabled={
+          newComment === "" ||
+          postedStatus === "pending" ||
+          newComment.length > 750 ||
+          newComment.length < 10
+        }
         type="submit"
       >
         {" "}
@@ -67,6 +81,11 @@ export const CommentPoster = ({ articleId, setPosted, setArticle, setErr }) => {
       <p className="submitComment" id="postVerificationPending">
         {" "}
         {postedStatus === "pending" ? `Comment being posted..` : " "}
+      </p>
+      <p>
+        {" "}
+        Characters: {newComment.length}/750.{" "}
+        <i id="characterLimit">Please submit between 10 and 750 characters.</i>
       </p>
     </form>
   );

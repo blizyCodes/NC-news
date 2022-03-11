@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
-import { UserContext } from "../contexts/User";
-import { useContext } from "react";
-export const Header = () => {
-  const { loggedInUser } = useContext(UserContext);
+
+export const Header = ({ loggedInUser }) => {
   return (
     <header className="header">
-      <Link to="/" id="header__H3">
+      <Link to="/" className="header__H3">
         <h3>NC News</h3>
         <p id="headerH3">...for news addicts by news addicts.</p>
       </Link>
-      <p className="header__user"> User: {loggedInUser} </p>
+      <Link className="header__user" to="/users">
+        <p> {loggedInUser === null ? "Log In" : loggedInUser} </p>
+      </Link>
     </header>
   );
 };
