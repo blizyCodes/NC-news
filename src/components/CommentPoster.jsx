@@ -36,7 +36,7 @@ export const CommentPoster = ({ articleId, setPosted, setArticle, setErr }) => {
           return updatedArticle;
         });
         setErr(
-          "Something went wrong, please try again. Please also ensure you are logged on."
+          "Something went wrong, please try again. Please also ensure you are logged in."
         );
       });
   };
