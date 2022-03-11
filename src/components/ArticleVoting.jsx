@@ -1,8 +1,10 @@
 import * as api from "../api";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../contexts/User";
 
 export const ArticleVoting = ({ article_id, setArticle, setErr }) => {
   const [voted, setVoted] = useState(0);
+  const { loggedInUser } = useContext(UserContext);
   const handleVoting = (incVotes) => {
     setArticle((currArticle) => {
       const updatedArticle = {
@@ -36,9 +38,9 @@ export const ArticleVoting = ({ article_id, setArticle, setErr }) => {
 
   return (
     <>
-      <dt>
+      <dt className="votingBtn">
         <button
-          disabled={voted === 1}
+          disabled={voted === 1 || loggedInUser === null}
           onClick={() => {
             handleVoting(1);
           }}
@@ -46,9 +48,9 @@ export const ArticleVoting = ({ article_id, setArticle, setErr }) => {
           Upvote
         </button>
       </dt>
-      <dt>
+      <dt className="votingBtn">
         <button
-          disabled={voted === -1}
+          disabled={voted === -1 || loggedInUser === null}
           onClick={() => {
             handleVoting(-1);
           }}
@@ -56,6 +58,7 @@ export const ArticleVoting = ({ article_id, setArticle, setErr }) => {
           Downvote
         </button>
       </dt>
+      <p className="votingBtn" id="votingNeedLogIn">{loggedInUser ? " " : "Please log in to vote"}</p>
     </>
   );
 };

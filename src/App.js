@@ -13,7 +13,7 @@ import { ErrorPage } from "./components/ErrorPage";
 import { Login } from "./components/Login";
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState("");
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   return (
     <UserContext.Provider value={{ loggedInUser }}>

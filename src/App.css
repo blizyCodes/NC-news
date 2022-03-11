@@ -150,3 +150,10 @@
 .user:hover {
   color: crimson;
 }
+
+.votingBtn {
+  display: inline;
+}
+#votingNeedLogIn {
+  color: red;
+}

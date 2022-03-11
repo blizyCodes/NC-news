@@ -8,7 +8,7 @@ export const Header = ({ loggedInUser }) => {
         <p id="headerH3">...for news addicts by news addicts.</p>
       </Link>
       <Link className="header__user" to="/users">
-        <p> {loggedInUser === "" ? "Log In" : loggedInUser} </p>
+        <p> {loggedInUser === null ? "Log In" : loggedInUser} </p>
       </Link>
     </header>
   );
