@@ -61,8 +61,8 @@
 .articleCard {
   margin: 5px;
   text-align: center;
-  background-color: lightskyblue;
-  border: 2px black solid;
+  /* background-color: lightskyblue; */
+  border: 2px skyblue solid;
 }
 .articleCard__link {
   color: black;
