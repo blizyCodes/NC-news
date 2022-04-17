@@ -80,9 +80,9 @@ export const ArticleList = () => {
           })}
         </ul>
         <ul>
-          {totalArticles > 0 && (
+          {articles.length < totalArticles && (
             <button
-              className="articleCard__button"
+              className="articleList_load_more_articles__button"
               onClick={() => {
                 increaseLimit(5);
               }}

@@ -5,37 +5,37 @@
 }
 .header {
   display: grid;
-  background-color: lightsalmon;
+  background-color: rgb(9, 63, 144);
   grid-template-columns: 1fr 1fr;
 }
 .header__H3 {
   text-align: left;
-  color: black;
+  color: white;
   font-size: x-large;
   margin-bottom: -10px;
   text-decoration: none;
   padding-left: 10px;
 }
 .header__H3:hover {
-  color: chocolate;
+  color: lightskyblue;
 }
 .header__user {
   text-align: right;
   font-weight: bolder;
   padding-right: 10px;
   text-decoration: none;
-  color: black;
+  color: white;
 }
 .header__user:visited {
   color: none;
 }
 .header__user:hover {
-  color: blue;
+  color: crimson;
 }
 .navigator {
   text-align: right;
   padding-right: 10px;
-  background-color: chocolate;
+  background-color: lightskyblue;
 }
 .navigator__link {
   text-decoration: none;
@@ -45,7 +45,7 @@
   font-weight: bold;
 }
 .navigator__link:hover {
-  color: pink;
+  color: crimson;
 }
 .navigator__link:visited {
   color: none;
@@ -59,7 +59,9 @@
   list-style: none;
 }
 .articleCard {
-  background-color: rgba(210, 153, 78, 0.516);
+  margin: 5px;
+  text-align: center;
+  background-color: lightskyblue;
   border: 2px black solid;
 }
 .articleCard__link {
@@ -71,6 +73,20 @@
 }
 .articleCard__button {
   background-color: #00000035;
+  font-weight: bold;
+  border: none;
+  color: white;
+  padding: 8px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+}
+
+.articleList_load_more_articles__button {
+  background-color: rgb(9, 63, 144);
+  font-weight: bold;
   border: none;
   color: white;
   padding: 8px 20px;
