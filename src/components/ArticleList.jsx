@@ -13,21 +13,32 @@ export const ArticleList = () => {
   const [errCode, setErrCode] = useState(null);
   const [sortBy, setSortBy] = useState("created_at");
   const [order, setOrder] = useState("desc");
+  const [limit, setLimit] = useState(10);
+  const [p, setP] = useState(1);
+  const [totalArticles, setTotalArticles] = useState(0);
   const navigate = useNavigate();
+
+  const increaseLimit = (increase) => {
+    setLimit((currLimit) => {
+      return currLimit + increase;
+    });
+    console.log(limit);
+  };
 
   useEffect(() => {
     api
-      .getArticles(sortBy, order, topic)
-      .then((articles) => {
+      .getArticles(sortBy, order, topic, limit, p)
+      .then(([articles, total_count]) => {
         setIsLoading(false);
         setArticles(articles);
+        setTotalArticles(total_count);
       })
       .catch((err) => {
         setErr(err.response.data.msg);
         setErrCode(err.response.status);
         setIsLoading(false);
       });
-  }, [topic, sortBy, order]);
+  }, [topic, sortBy, order, limit, p]);
 
   if (err)
     return (
@@ -39,26 +50,46 @@ export const ArticleList = () => {
               ? () => {
                   navigate("/");
                 }
-              : () => {setErr(null)}
+              : () => {
+                  setErr(null);
+                }
           }
         >
           {" "}
           Back{" "}
         </button>
       </div>
-    ); else {
-  return isLoading ? (
-    <h2>Just getting that for you ...</h2>
-  ) : (
-    <div className="articlesPage">
-      <SortBy setSortBy={setSortBy} />
-      <Order setOrder={setOrder} />
-
-      <ul className="articleList">
-        {articles.map((article) => {
-          return <ArticleCard key={article.title} article={article} />;
-        })}
-      </ul>
-    </div>
-  );
-}};
+    );
+  else {
+    return isLoading ? (
+      <h2>Just getting that for you ...</h2>
+    ) : (
+      <div className="articlesPage">
+        <SortBy setSortBy={setSortBy} />
+        <Order setOrder={setOrder} />
+        <p className="dropdown-sortBy-order">
+          {" "}
+          Total Articles: <b>{totalArticles}</b>
+        </p>
+        <ul className="articleList">
+          {articles.map((article) => {
+            return <ArticleCard key={article.title} article={article} />;
+          })}
+        </ul>
+        <ul>
+          {totalArticles > 0 && (
+            <button
+              className="articleCard__button"
+              onClick={() => {
+                increaseLimit(10);
+              }}
+            >
+              {" "}
+              Load More Articles{" "}
+            </button>
+          )}
+        </ul>
+      </div>
+    );
+  }
+};
