@@ -6,7 +6,7 @@
 .header {
   display: grid;
   background-color: rgb(9, 63, 144);
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 .header__H3 {
   text-align: left;
@@ -18,6 +18,14 @@
 }
 .header__H3:hover {
   color: lightskyblue;
+}
+
+.header__img {
+  margin-left: 24px;
+  margin-right: auto;
+  width: 200px;
+  height: auto;
+  object-fit: fill;
 }
 .header__user {
   text-align: right;
@@ -33,7 +41,7 @@
   color: crimson;
 }
 .navigator {
-  text-align: right;
+  text-align: center;
   padding-right: 10px;
   background-color: lightskyblue;
 }
@@ -41,7 +49,7 @@
   text-decoration: none;
   color: black;
   padding-right: 10px;
-  text-align: left;
+  text-align: center;
   font-weight: bold;
 }
 .navigator__link:hover {

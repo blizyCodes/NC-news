@@ -10,7 +10,7 @@ export const Navigator = () => {
       setTopics(topics);
     });
   }, []);
-  
+
   return (
     <nav className="navigator">
       <Link className="navigator__link" to="/articles">
