@@ -9,6 +9,7 @@ export const ArticleList = () => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { topic } = useParams();
+  const [previousTopic, setPreviousTopic] = useState(topic);
   const [err, setErr] = useState(null);
   const [errCode, setErrCode] = useState(null);
   const [sortBy, setSortBy] = useState("created_at");
@@ -22,23 +23,25 @@ export const ArticleList = () => {
     setLimit((currLimit) => {
       return currLimit + increase;
     });
-    console.log(limit);
   };
 
   useEffect(() => {
+    if (topic && previousTopic !== topic) setLimit(10); //ensures limit is reset every time you change topic.
+    if (!topic && previousTopic) setLimit(10); //ensures limit resets when going back to all articles from a topic.
     api
       .getArticles(sortBy, order, topic, limit, p)
       .then(([articles, total_count]) => {
         setIsLoading(false);
         setArticles(articles);
         setTotalArticles(total_count);
+        setPreviousTopic(topic);
       })
       .catch((err) => {
         setErr(err.response.data.msg);
         setErrCode(err.response.status);
         setIsLoading(false);
       });
-  }, [topic, sortBy, order, limit, p]);
+  }, [topic, sortBy, order, limit, p, previousTopic]);
 
   if (err)
     return (
@@ -81,7 +84,7 @@ export const ArticleList = () => {
             <button
               className="articleCard__button"
               onClick={() => {
-                increaseLimit(10);
+                increaseLimit(5);
               }}
             >
               {" "}
