@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# NC News App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a frontend application which is designed for users to interact with my News API via a user-friendly interface.
 
-## Available Scripts
+## Link to deployed version
 
-In the project directory, you can run:
+---
 
-### `npm start`
+https://dbnews.netlify.app/
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+The NC News App contains the below features and functionality:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Articles
 
-### `npm run build`
+- Home page displays article cards containing the title, topic, author, date, number of comments, and number of votes through the use of a collapser.
+- When article cards are selected, users will be redirected to the article page, displaying the article body, and a list of comments.
+- Topics are displayed in a navigator bar that is constantly present. A user can view articles of a selected topic by clicking on it.
+- Users can sort articles based on the following criteria:
+  - date (default)
+  - comment count
+  - votes
+  - order (ascending or descending)
+- The list of articles displayed is initially limited to 10 - this can be increased by selecting the 'Load More Articles' button at the bottom of the page. The button disappears when all articles of the selected topic (if any) have been displayed.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Comments
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Comments are displayed in the related article's page through the use of a collapser.
+- Users are able to post comments in a text box below the article if they are logged in.
+- Users are able to delete comments that they have posted themselves.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Votes
 
-### `npm run eject`
+- Votes are displayed for each article and comment.
+- Users are able to increase or decrease the votes of articles by 1 once.
+- Functionality to upvote/downvote comments will be added in the future.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Link to repository
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+https://github.com/donblizy/news-frontend
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Installation Instructions
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Minimum version of Node supported - v16.14.0
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Clone the repository by inputting the following in your command line terminal
 
-### Code Splitting
+```
+git clone https://github.com/donblizy/news-frontend.git
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Once cloned, navigate to that directory in your terminal and run the below command to install all of the dependencies needed as found in the package.json file. The command is:
 
-### Analyzing the Bundle Size
+```
+npm i
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Launch the app in your browser:
 
-### Making a Progressive Web App
+```
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Link to back-end API repository
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+https://github.com/donblizy/News-API
