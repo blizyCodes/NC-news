@@ -1,10 +1,13 @@
 import * as api from "../api";
-import { useState, useContext } from "react";
-import { UserContext } from "../contexts/User";
+import { useState } from "react";
 
-export const ArticleVoting = ({ article_id, setArticle, setErr }) => {
+export const ArticleVoting = ({
+  article_id,
+  setArticle,
+  setErr,
+  loggedInUser,
+}) => {
   const [voted, setVoted] = useState(0);
-  const { loggedInUser } = useContext(UserContext);
   const handleVoting = (incVotes) => {
     setArticle((currArticle) => {
       const updatedArticle = {
@@ -16,27 +19,26 @@ export const ArticleVoting = ({ article_id, setArticle, setErr }) => {
     setVoted((currVoted) => {
       return currVoted + incVotes;
     });
-    api
-      .patchVotesOnArticleByArticleId(article_id, incVotes)
-      .catch((err) => {
-        setArticle((currArticle) => {
-          const updatedArticle = {
-            ...currArticle,
-          };
-          updatedArticle.votes -= incVotes;
-          return updatedArticle;
-        });
-        setVoted((currVoted) => {
-          return currVoted + incVotes;
-        });
-        setErr("Something went wrong, please try again");
+    api.patchVotesOnArticleByArticleId(article_id, incVotes).catch((err) => {
+      setArticle((currArticle) => {
+        const updatedArticle = {
+          ...currArticle,
+        };
+        updatedArticle.votes -= incVotes;
+        return updatedArticle;
       });
+      setVoted((currVoted) => {
+        return currVoted + incVotes;
+      });
+      setErr("Something went wrong, please try again");
+    });
   };
 
   return (
     <>
-      <dt className="votingBtn">
+      <dt>
         <button
+          className="votingBtn"
           disabled={voted === 1 || loggedInUser === null}
           onClick={() => {
             handleVoting(1);
@@ -55,7 +57,12 @@ export const ArticleVoting = ({ article_id, setArticle, setErr }) => {
           Downvote
         </button>
       </dt>
-      <p className="votingBtn" id="votingNeedLogIn">{loggedInUser ? " " : "Please log in to vote"}</p>
+      {!loggedInUser && (
+        <p className="votingBtnWarning" id="votingNeedLogIn">
+          {" "}
+          "Please log in to vote"{" "}
+        </p>
+      )}
     </>
   );
 };

@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import { UserContext } from "../contexts/User";
+import { useState } from "react";
+
 import * as api from "../api";
 
 export const CommentPoster = ({
@@ -7,8 +7,8 @@ export const CommentPoster = ({
   setComments,
   setArticle,
   setErr,
+  loggedInUser,
 }) => {
-  const { loggedInUser } = useContext(UserContext);
   const [newComment, setNewComment] = useState("");
   const [postedStatus, setPostedStatus] = useState("");
 
@@ -67,12 +67,14 @@ export const CommentPoster = ({
           newComment === "" ||
           postedStatus === "pending" ||
           newComment.length > 750 ||
-          newComment.length < 10
+          newComment.length < 2
         }
         type="submit"
       >
         {" "}
-        {newComment === "" ? "Input Comment" : "Submit Comment"}{" "}
+        {newComment === "" || newComment.length < 2
+          ? "Input Comment"
+          : "Submit Comment"}{" "}
       </button>
       <p className="submitComment" id="postVerification">
         {" "}
@@ -82,11 +84,7 @@ export const CommentPoster = ({
         {" "}
         {postedStatus === "pending" ? `Comment being posted..` : " "}
       </p>
-      <p>
-        {" "}
-        Characters: {newComment.length}/750.{" "}
-        <i id="characterLimit">Please submit between 10 and 750 characters.</i>
-      </p>
+      <p> Characters: {newComment.length}/750. </p>
     </form>
   );
 };
