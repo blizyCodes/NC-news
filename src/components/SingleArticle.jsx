@@ -63,21 +63,22 @@ export const SingleArticle = () => {
       <article className="singleArticle">
         <h1>{article.title}</h1>
         <dt>
-          by <b>{article.author}</b>
-        </dt>
-        <dt>
-          {" "}
-          on <u>{date.toLocaleString()}</u>
-        </dt>
-        <dt>
           Topic:{" "}
           {article.topic && (
             <i>
-              {article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}
+              <b>
+                {article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}
+              </b>
             </i>
           )}
         </dt>
-        <dt> Votes: {article.votes} </dt>
+
+        <dt> {date.toLocaleString()}</dt>
+
+        <dt>
+          {" "}
+          Votes: <b>{article.votes}</b>{" "}
+        </dt>
         <ArticleVoting
           loggedInUser={loggedInUser}
           article_id={article_id}
@@ -86,7 +87,10 @@ export const SingleArticle = () => {
         />
 
         <p className="singleArticle__body"> {article.body}</p>
-        <p>Comments: {article.comment_count} </p>
+        <dt className="singleArticle__author">
+          Author: <b>{article.author}</b>
+        </dt>
+
         {loggedInUser && (
           <CommentPoster
             loggedInUser={loggedInUser}
@@ -98,6 +102,9 @@ export const SingleArticle = () => {
             err={err}
           />
         )}
+        <p className="singleArticle__comments">
+          Comments: {article.comment_count}{" "}
+        </p>
         <CommentsWrapper>
           <CommentList
             isLoading={isLoading}

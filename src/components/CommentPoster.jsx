@@ -49,7 +49,7 @@ export const CommentPoster = ({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="formCommentToPost" onSubmit={handleSubmit}>
       <label htmlFor="commentToPost">Post Comment </label>
       <input
         id="commentToPost"
