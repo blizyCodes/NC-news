@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import * as api from "../api";
 import { CommentsWrapper } from "./CommentsWrapper";
 import { CommentList } from "./CommentsList";
 import { ArticleVoting } from "./ArticleVoting";
 import { CommentPoster } from "./CommentPoster";
+import { UserContext } from "../contexts/User";
 
 export const SingleArticle = () => {
   const [article, setArticle] = useState({});
@@ -14,6 +15,8 @@ export const SingleArticle = () => {
   const [errCode, setErrCode] = useState(null);
   const { article_id } = useParams();
   const navigate = useNavigate();
+  const { loggedInUser } = useContext(UserContext);
+
   useEffect(() => {
     Promise.all([
       api.getArticleById(article_id),
@@ -60,36 +63,48 @@ export const SingleArticle = () => {
       <article className="singleArticle">
         <h1>{article.title}</h1>
         <dt>
-          by <b>{article.author}</b>
-        </dt>
-        <dt>
-          {" "}
-          on <u>{date.toLocaleString()}</u>
-        </dt>
-        <dt>
           Topic:{" "}
           {article.topic && (
             <i>
-              {article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}
+              <b>
+                {article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}
+              </b>
             </i>
           )}
         </dt>
-        <dt> -- Votes: {article.votes} </dt>
+
+        <dt> {date.toLocaleString()}</dt>
+
+        <dt>
+          {" "}
+          Votes: <b>{article.votes}</b>{" "}
+        </dt>
         <ArticleVoting
+          loggedInUser={loggedInUser}
           article_id={article_id}
           setArticle={setArticle}
           setErr={setErr}
         />
+
         <p className="singleArticle__body"> {article.body}</p>
-        <p>Comments: {article.comment_count} </p>
-        <CommentPoster
-          articleId={article_id}
-          setComments={setComments}
-          article={article}
-          setArticle={setArticle}
-          setErr={setErr}
-          err={err}
-        />
+        <dt className="singleArticle__author">
+          Author: <b>{article.author}</b>
+        </dt>
+
+        {loggedInUser && (
+          <CommentPoster
+            loggedInUser={loggedInUser}
+            articleId={article_id}
+            setComments={setComments}
+            article={article}
+            setArticle={setArticle}
+            setErr={setErr}
+            err={err}
+          />
+        )}
+        <p className="singleArticle__comments">
+          Comments: {article.comment_count}{" "}
+        </p>
         <CommentsWrapper>
           <CommentList
             isLoading={isLoading}

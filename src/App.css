@@ -80,7 +80,9 @@
   color: none;
 }
 .articleCard__button {
-  background-color: #00000035;
+  margin: auto;
+  cursor: pointer;
+  background-color: rgb(9, 63, 144);
   font-weight: bold;
   border: none;
   color: white;
@@ -89,10 +91,11 @@
   text-decoration: none;
   display: inline-block;
   font-size: 12px;
-  margin: 4px 2px;
+  margin: 4px 22px;
 }
 
 .articleList_load_more_articles__button {
+  cursor: pointer;
   background-color: rgb(9, 63, 144);
   font-weight: bold;
   border: none;
@@ -109,25 +112,40 @@
   display: inline;
   text-align: right;
   padding-right: 5px;
-  padding-left: 5px;
+  padding-left: 10px;
+}
+
+.singleArticle h1 {
+  margin-left: 10px;
+  text-align: center;
 }
 .singleArticle__body {
-  text-align: justify;
+  padding: 10px;
+  margin: 10px;
+  border: 2px skyblue solid;
+  text-align: left;
   padding-left: 20px;
   padding-right: 20px;
 }
 
+.singleArticle__comments {
+  margin-top: 25px;
+  margin-left: 25px;
+  font-weight: bold;
+}
+
 .commentCard {
   padding-left: 5px;
-  padding-right: 20px;
+  padding-right: 2px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2px;
-  border-bottom: 5px black groove;
+  border-top: 5px skyblue groove;
 }
 
 .commentCard__body {
-  padding-right: 20px;
+  padding-right: 22px;
+  text-align: left;
 }
 
 #goToTop {
@@ -135,9 +153,16 @@
 }
 
 .submitComment {
+  margin-left: 5px;
+  cursor: pointer;
   display: inline;
 }
 
+.formCommentToPost {
+  margin-top: 25px;
+  margin-bottom: 35px;
+  margin-left: 25px;
+}
 #postVerification {
   color: green;
 }
@@ -162,6 +187,7 @@
 }
 
 .deleteBtn {
+  cursor: pointer;
   margin-left: 10px;
   width: auto;
   height: 30px;
@@ -176,6 +202,12 @@
 }
 
 .votingBtn {
+  cursor: pointer;
+  display: inline;
+}
+
+.votingBtnWarning {
+  margin-left: 5px;
   display: inline;
 }
 #votingNeedLogIn {
