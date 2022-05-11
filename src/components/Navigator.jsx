@@ -13,14 +13,12 @@ export const Navigator = () => {
 
   return (
     <nav className="navigator">
-      <Link className="navigator__link" to="/articles">
-        {" "}
-        All Articles{" "}
-      </Link>
-
       {topics.map(({ slug }) => {
         return <TopicList key={slug} topic={slug} />;
       })}
+      <Link className="navigator--link--allArticles" to="/articles">
+        See All Articles
+      </Link>
     </nav>
   );
 };

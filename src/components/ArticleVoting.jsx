@@ -38,7 +38,7 @@ export const ArticleVoting = ({
     <>
       <dt>
         <button
-          className="votingBtn"
+          className="singleArticle--button--voting"
           disabled={voted === 1 || loggedInUser === null}
           onClick={() => {
             handleVoting(1);
@@ -47,7 +47,7 @@ export const ArticleVoting = ({
           Upvote
         </button>
       </dt>
-      <dt className="votingBtn">
+      <dt className="singleArticle--button--voting">
         <button
           disabled={voted === -1 || loggedInUser === null}
           onClick={() => {
@@ -58,7 +58,7 @@ export const ArticleVoting = ({
         </button>
       </dt>
       {!loggedInUser && (
-        <p className="votingBtnWarning" id="votingNeedLogIn">
+        <p className="singleArticle--text--votingWarning" id="votingNeedLogIn">
           {" "}
           "Please log in to vote"{" "}
         </p>

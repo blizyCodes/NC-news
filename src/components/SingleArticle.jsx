@@ -86,8 +86,8 @@ export const SingleArticle = () => {
           setErr={setErr}
         />
 
-        <p className="singleArticle__body"> {article.body}</p>
-        <dt className="singleArticle__author">
+        <p className="singleArticle--body"> {article.body}</p>
+        <dt>
           Author: <b>{article.author}</b>
         </dt>
 
@@ -102,7 +102,7 @@ export const SingleArticle = () => {
             err={err}
           />
         )}
-        <p className="singleArticle__comments">
+        <p className="singleArticle--comments">
           Comments: {article.comment_count}{" "}
         </p>
         <CommentsWrapper>

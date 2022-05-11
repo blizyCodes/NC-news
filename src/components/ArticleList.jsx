@@ -67,7 +67,7 @@ export const ArticleList = () => {
     return isLoading ? (
       <h2>Just getting that for you ...</h2>
     ) : (
-      <div className="articlesPage">
+      <section className="articleList--top">
         <SortBy setSortBy={setSortBy} />
         <Order setOrder={setOrder} />
         <p className="dropdown-sortBy-order">
@@ -79,10 +79,9 @@ export const ArticleList = () => {
             return <ArticleCard key={article.title} article={article} />;
           })}
         </ul>
-        <ul>
+        <div className="articleList--button-loadMore">
           {articles.length < totalArticles && (
             <button
-              className="articleList_load_more_articles__button"
               onClick={() => {
                 increaseLimit(5);
               }}
@@ -91,8 +90,8 @@ export const ArticleList = () => {
               Load More Articles{" "}
             </button>
           )}
-        </ul>
-      </div>
+        </div>
+      </section>
     );
   }
 };

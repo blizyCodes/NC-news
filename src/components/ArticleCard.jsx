@@ -16,7 +16,7 @@ export const ArticleCard = ({
   return (
     <li className="articleCard">
       <h2>
-        <Link className="articleCard__link" to={`/articles/${article_id}`}>
+        <Link className="articleCard--link" to={`/articles/${article_id}`}>
           {title}
         </Link>
       </h2>

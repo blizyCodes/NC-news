@@ -1,38 +1,37 @@
-.home {
-  text-align: center;
-  padding-left: 5px;
-  padding-right: 5px;
-}
 .header {
   display: grid;
   background-color: rgb(9, 63, 144);
   grid-template-columns: 1fr 1fr 1fr;
 }
-.header__H3 {
+.header--logo {
   text-align: left;
   color: white;
-  font-size: x-large;
+  font-size: larger;
   margin-bottom: -10px;
   text-decoration: none;
   padding-left: 10px;
 }
-.header__H3:hover {
-  color: lightskyblue;
-}
 
-.header__img {
-  margin-left: 24px;
-  margin-right: auto;
+.header--img {
+  justify-self: center;
   width: 200px;
   height: auto;
   object-fit: fill;
 }
-.header__user {
+#headerImg {
+  justify-self: center;
+}
+
+.header--username {
   text-align: right;
   font-weight: bolder;
   padding-right: 10px;
-  text-decoration: none;
+  align-self: end;
+}
+
+.header--username #usernameLink {
   color: white;
+  text-decoration: none;
 }
 .header__user:visited {
   color: none;
@@ -41,22 +40,46 @@
   color: crimson;
 }
 .navigator {
-  text-align: center;
+  text-align: right;
   padding-right: 10px;
   background-color: lightskyblue;
 }
-.navigator__link {
+
+.navigator--link--allArticles {
+  position: absolute;
+  left: 15px;
   text-decoration: none;
   color: black;
   padding-right: 10px;
-  text-align: center;
   font-weight: bold;
 }
-.navigator__link:hover {
+.navigator--link {
+  text-decoration: none;
+  color: black;
+  padding-right: 10px;
+  font-weight: bold;
+}
+.navigator--link:hover {
   color: crimson;
 }
-.navigator__link:visited {
+.navigator--link:visited {
   color: none;
+}
+
+.home {
+  text-align: center;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.home #home--link {
+  text-decoration: none;
+  color: black;
+  font-weight: bolder;
+}
+.articleList--top {
+  margin-top: 7px;
+  justify-content: center;
 }
 .articleList {
   padding-left: 5px;
@@ -66,20 +89,40 @@
   gap: 2px;
   list-style: none;
 }
+
+.articleList--button-loadMore {
+  text-align: center;
+}
+
+.articleList--button-loadMore button {
+  cursor: pointer;
+  background-color: rgb(9, 63, 144);
+  font-weight: bold;
+  border: none;
+  color: white;
+  padding: 8px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+}
 .articleCard {
+  display: grid;
+  grid-template-rows: 1fr auto;
   margin: 5px;
   text-align: center;
-  /* background-color: lightskyblue; */
   border: 2px skyblue solid;
 }
-.articleCard__link {
+.articleCard--link {
   color: black;
   text-decoration: none;
 }
-.articleCard__link:visited {
+.articleCard--link:visited {
   color: none;
 }
-.articleCard__button {
+
+.articleCard--button--showMore button {
   margin: auto;
   cursor: pointer;
   background-color: rgb(9, 63, 144);
@@ -94,20 +137,6 @@
   margin: 4px 22px;
 }
 
-.articleList_load_more_articles__button {
-  cursor: pointer;
-  background-color: rgb(9, 63, 144);
-  font-weight: bold;
-  border: none;
-  color: white;
-  padding: 8px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 12px;
-  margin: 4px 2px;
-}
-
 .singleArticle dt {
   display: inline;
   text-align: right;
@@ -119,7 +148,7 @@
   margin-left: 10px;
   text-align: center;
 }
-.singleArticle__body {
+.singleArticle--body {
   padding: 10px;
   margin: 10px;
   border: 2px skyblue solid;
@@ -128,12 +157,14 @@
   padding-right: 20px;
 }
 
-.singleArticle__comments {
+.singleArticle--comments {
   margin-top: 25px;
   margin-left: 25px;
   font-weight: bold;
 }
-
+.commentList {
+  padding-right: 35px;
+}
 .commentCard {
   padding-left: 5px;
   padding-right: 2px;
@@ -143,7 +174,7 @@
   border-top: 5px skyblue groove;
 }
 
-.commentCard__body {
+.commentCard--body {
   padding-right: 22px;
   text-align: left;
 }
@@ -152,13 +183,16 @@
   text-decoration: none;
 }
 
-.submitComment {
+.singleArticle--button--submitComment {
   margin-left: 5px;
+  padding: 5px;
   cursor: pointer;
   display: inline;
+  border: none;
+  font-weight: bold;
 }
 
-.formCommentToPost {
+.form--commentToPost {
   margin-top: 25px;
   margin-bottom: 35px;
   margin-left: 25px;
@@ -176,21 +210,24 @@
   padding: 5px;
 }
 
-.articlesPage {
-  margin-top: 5px;
-}
-
 #characterLimit {
   color: rgba(255, 0, 0, 0.544);
   padding-left: 5px;
   padding-right: 5px;
 }
 
-.deleteBtn {
+.commentCard--button--deleteComment {
   cursor: pointer;
-  margin-left: 10px;
-  width: auto;
-  height: 30px;
+  background-color: rgb(144, 9, 20);
+  font-weight: bold;
+  border: none;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
 }
 
 .user {
@@ -201,15 +238,52 @@
   color: crimson;
 }
 
-.votingBtn {
+.singleArticle--button--voting {
   cursor: pointer;
   display: inline;
 }
 
-.votingBtnWarning {
+.commentCard--button--showMore {
+  margin: auto;
+  cursor: pointer;
+  background-color: rgb(9, 63, 144);
+  font-weight: bold;
+  border: none;
+  color: white;
+  padding: 8px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 22px;
+}
+
+.singleArticle--text--votingWarning {
   margin-left: 5px;
   display: inline;
 }
 #votingNeedLogIn {
   color: red;
+}
+
+@media (max-width: 430px) {
+  .header--img {
+    width: 100px;
+    height: auto;
+    object-fit: fill;
+  }
+  #headerImg {
+    align-self: end;
+  }
+
+  .header--logo {
+    font-size: medium;
+  }
+
+  .navigator--link--allArticles {
+    left: 5px;
+  }
+  .navigator {
+    padding-right: 0px;
+  }
 }

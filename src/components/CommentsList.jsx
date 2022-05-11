@@ -4,7 +4,7 @@ export const CommentList = ({ isLoading, comments, setComments, setArticle, setE
   return isLoading ? (
     <h2>Fetching comments..</h2>
   ) : (
-    <ol>
+    <ol className="commentList">
       {comments.map((comment) => {
         return (
           <CommentCard

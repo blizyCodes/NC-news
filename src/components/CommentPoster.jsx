@@ -49,7 +49,7 @@ export const CommentPoster = ({
   };
 
   return (
-    <form className="formCommentToPost" onSubmit={handleSubmit}>
+    <form className="form--commentToPost" onSubmit={handleSubmit}>
       <label htmlFor="commentToPost">Post Comment </label>
       <input
         id="commentToPost"
@@ -62,7 +62,7 @@ export const CommentPoster = ({
         }}
       ></input>
       <button
-        className="submitComment"
+        className="singleArticle--button--submitComment"
         disabled={
           newComment === "" ||
           postedStatus === "pending" ||
@@ -73,17 +73,13 @@ export const CommentPoster = ({
       >
         {" "}
         {newComment === "" || newComment.length < 2
-          ? "Input Comment"
+          ? "Type to submit"
           : "Submit Comment"}{" "}
       </button>
-      <p className="submitComment" id="postVerification">
-        {" "}
-        {postedStatus === "done" ? `Comment posted!` : " "}
-      </p>
-      <p className="submitComment" id="postVerificationPending">
-        {" "}
-        {postedStatus === "pending" ? `Comment being posted..` : " "}
-      </p>
+      {postedStatus === "done" && <p id="postVerification">Comment posted!</p>}
+      {postedStatus === "pending" && (
+        <p id="postVerificationPending">Comment being posted..</p>
+      )}
       <p> Characters: {newComment.length}/750. </p>
     </form>
   );

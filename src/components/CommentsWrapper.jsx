@@ -10,7 +10,7 @@ export const CommentsWrapper = ({ children }) => {
   return (
     <>
       {isVisible && children}
-      <button className="articleCard__button" onClick={handleClick}>
+      <button className="commentCard--button--showMore" onClick={handleClick}>
         {isVisible ? "Hide Comments" : "Show Comments"}
       </button>
     </>

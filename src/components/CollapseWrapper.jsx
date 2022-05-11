@@ -8,11 +8,11 @@ export const CollapseWrapper = ({ children }) => {
     });
   };
   return (
-    <>
+    <div className="articleCard--button--showMore">
       {isVisible && children}
-      <button className="articleCard__button" onClick={handleClick}>
+      <button onClick={handleClick}>
         {isVisible ? "Show Less" : "Show More"}
       </button>
-    </>
+    </div>
   );
 };

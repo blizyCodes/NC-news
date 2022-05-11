@@ -16,7 +16,7 @@ export const CommentCard = ({
         <b> {author} </b>
         <br /> {date.toLocaleString()}
       </p>
-      <p className="commentCard__body">{body}</p>
+      <p className="commentCard--body">{body}</p>
       <p>
         Votes: <b>{votes}</b>{" "}
         {loggedInUser === author && (

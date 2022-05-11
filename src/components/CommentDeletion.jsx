@@ -45,7 +45,7 @@ export const CommentDeletion = ({
     <>
       <button
         onClick={handleClick}
-        className="deleteBtn"
+        className="commentCard--button--deleteComment"
         disabled={deletedStatus === "pending"}
       >
         {" "}
